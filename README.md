@@ -13,15 +13,33 @@ Classificar tumores de mama como **malignos** ou **benignos** com base em caract
 | `diagnosis` | `M` = maligno, `B` = benigno |
 | demais colunas | 30 medidas numéricas (raio, textura, perímetro, etc.) |
 
+## Entrega EXTRA — Visão Computacional (CNN)
+
+Além da parte obrigatória (dados estruturados), o grupo implementou a **entrega EXTRA** do enunciado: classificação de exames por **imagem** com **Rede Neural Convolucional (CNN)**.
+
+| Notebook | Descrição |
+|----------|-----------|
+| **`notebooks/Pneumonia.ipynb`** | **EXTRA principal** — CNN para raio-x de tórax (NORMAL vs PNEUMONIA), dataset [Chest X-Ray (Kaggle)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia) |
+| `notebooks/02_cnn_mamografias.ipynb` | Complementar — CNN em mamografias (CBIS-DDSM), desenvolvido no Colab |
+
+Documentação da parte EXTRA:
+- `docs/Análise dos resultados de pneumonia.pdf`
+- `docs/figuras/raio-x.png` e `docs/figuras/resultados.png`
 
 ## Estrutura
 
 ```
 Tech Challenge/
 ├── data/
-│   └── data.csv                       # dataset do tech challenge
+│   └── data.csv                              # dataset câncer de mama (obrigatório)
+├── docs/
+│   ├── Relatorio_Tech_Challenge_Fase1.pdf    # relatório técnico completo
+│   ├── Análise dos resultados de pneumonia.pdf
+│   └── figuras/                              # gráficos dos relatórios
 ├── notebooks/
-│   └── 01_analise_e_modelagem.ipynb   # EDA, pré-processamento, modelos, métricas, SHAP
+│   ├── 01_analise_e_modelagem.ipynb          # OBRIGATÓRIO — EDA, ML, SHAP
+│   ├── Pneumonia.ipynb                       # EXTRA — CNN raio-x (visão computacional)
+│   └── 02_cnn_mamografias.ipynb              # EXTRA complementar — CNN mamografias
 ├── requirements.txt
 └── README.md
 ```
@@ -79,23 +97,57 @@ git push origin main
 
 ## Como executar
 
+### Parte obrigatória — câncer de mama (ML)
+
 ```bash
-cd "Tech Challenge"
+cd tech-challenge-fiap
 python -m pip install -r requirements.txt
 python -m ipykernel install --user --name tech-challenge
 jupyter notebook notebooks/01_analise_e_modelagem.ipynb
 ```
 
+### Parte EXTRA — Pneumonia (CNN / visão computacional)
+
+O notebook `Pneumonia.ipynb` foi desenvolvido para **Google Colab** (usa GPU e download via Kaggle). Para executar:
+
+**Opção A — Google Colab (recomendado)**
+
+1. Abra o notebook no Colab ou faça upload de `notebooks/Pneumonia.ipynb`
+2. Ative **Runtime → Change runtime type → GPU**
+3. Crie uma API key em [kaggle.com/settings](https://www.kaggle.com/settings) e baixe o `kaggle.json`
+4. Execute as células na ordem — a célula inicial pede upload do `kaggle.json`
+5. O dataset Chest X-Ray será baixado automaticamente (~1,2 GB)
+
+**Opção B — Local (Jupyter)**
+
+```bash
+pip install tensorflow opencv-python kaggle jupyter
+# Coloque kaggle.json em ~/.kaggle/ (Linux/Mac) ou C:\Users\<user>\.kaggle\ (Windows)
+jupyter notebook notebooks/Pneumonia.ipynb
+```
+
+> Ajuste `BASE_DIR` nas células de carregamento para o caminho local do dataset após o download manual:
+> [Chest X-Ray Pneumonia (Kaggle)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
+
+### Regenerar relatório (PDF)
+
+```bash
+pip install reportlab
+python docs/gerar_relatorio.py
+```
+
 ## Entregáveis (checklist do PDF)
 
-- [ ] Repositório Git com código e README
-- [ ] Notebook ou scripts Python documentados
-- [ ] Relatório PDF (EDA, pré-processamento, modelos, resultados, discussão crítica)
-- [ ] Vídeo (até 15 min) no YouTube/Vimeo
-- [ ] (Opcional) CNN em mamografias — nota extra
+- [x] Repositório Git com código e README
+- [x] Notebook ou scripts Python documentados
+- [x] Relatório PDF (EDA, pré-processamento, modelos, resultados, discussão crítica)
+- [x] Vídeo (até 15 min): [YouTube](https://youtu.be/bGNR-eNHyKk)
+- [x] **EXTRA:** CNN em imagens médicas — `Pneumonia.ipynb` (visão computacional)
 
 ## Dataset
 
-Arquivo local: `data/data.csv` (569 amostras, 30 features + `diagnosis`).
+**Obrigatório:** `data/data.csv` (569 amostras, 30 features + `diagnosis`).
 
-Se o arquivo não existir, o notebook baixa automaticamente da URL do GitHub acima.
+**EXTRA:** Chest X-Ray Pneumonia — download via Kaggle no notebook `Pneumonia.ipynb`.
+
+Se o `data.csv` não existir, o notebook 01 baixa automaticamente da URL do GitHub acima.
