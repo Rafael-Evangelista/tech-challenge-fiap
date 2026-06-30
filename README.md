@@ -17,10 +17,7 @@ Classificar tumores de mama como **malignos** ou **benignos** com base em caract
 
 Além da parte obrigatória (dados estruturados), o grupo implementou a **entrega EXTRA** do enunciado: classificação de exames por **imagem** com **Rede Neural Convolucional (CNN)**.
 
-| Notebook | Descrição |
-|----------|-----------|
-| **`notebooks/Pneumonia.ipynb`** | **EXTRA principal** — CNN para raio-x de tórax (NORMAL vs PNEUMONIA), dataset [Chest X-Ray (Kaggle)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia) |
-| `notebooks/02_cnn_mamografias.ipynb` | Complementar — CNN em mamografias (CBIS-DDSM), desenvolvido no Colab |
+Notebook EXTRA: **`notebooks/Pneumonia.ipynb`** — CNN para raio-x de tórax (NORMAL vs PNEUMONIA), dataset [Chest X-Ray (Kaggle)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia).
 
 Documentação da parte EXTRA:
 - `docs/Análise dos resultados de pneumonia.pdf`
@@ -33,13 +30,12 @@ Tech Challenge/
 ├── data/
 │   └── data.csv                              # dataset câncer de mama (obrigatório)
 ├── docs/
-│   ├── Relatorio_Tech_Challenge_Fase1.pdf    # relatório técnico completo
+│   ├── Relatorio_Tech_Challenge_Fase1.pdf
 │   ├── Análise dos resultados de pneumonia.pdf
-│   └── figuras/                              # gráficos dos relatórios
+│   └── figuras/
 ├── notebooks/
 │   ├── 01_analise_e_modelagem.ipynb          # OBRIGATÓRIO — EDA, ML, SHAP
 │   ├── Pneumonia.ipynb                       # EXTRA — CNN raio-x (visão computacional)
-│   └── 02_cnn_mamografias.ipynb              # EXTRA complementar — CNN mamografias
 ├── requirements.txt
 └── README.md
 ```
@@ -129,14 +125,7 @@ jupyter notebook notebooks/Pneumonia.ipynb
 > Ajuste `BASE_DIR` nas células de carregamento para o caminho local do dataset após o download manual:
 > [Chest X-Ray Pneumonia (Kaggle)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
 
-### Regenerar relatório (PDF)
-
-```bash
-pip install reportlab
-python docs/gerar_relatorio.py
-```
-
-## Entregáveis (checklist do PDF)
+## Entregáveis
 
 - [x] Repositório Git com código e README
 - [x] Notebook ou scripts Python documentados
